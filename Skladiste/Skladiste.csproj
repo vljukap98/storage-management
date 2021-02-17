@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A5EA55F5-6B0D-42DA-AF97-23B38E5FDB72}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Skladiste</RootNamespace>
+    <AssemblyName>Skladiste</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Devart.Data, Version=5.0.2604.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <HintPath>packages\Devart.Data.5.0.2604\lib\netstandard2.0\Devart.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Devart.Data.PostgreSql, Version=7.20.1812.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <HintPath>packages\Devart.Data.PostgreSql.7.20.1812\lib\netstandard2.0\Devart.Data.PostgreSql.dll</HintPath>
+    </Reference>
+    <Reference Include="Devart.Data.PostgreSql.Entity.EF6, Version=7.20.1812.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <HintPath>packages\Devart.Data.PostgreSql.EF6.7.20.1812\lib\net472\Devart.Data.PostgreSql.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=5.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>packages\Npgsql.5.0.3\lib\netstandard2.0\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.PerformanceCounter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Diagnostics.PerformanceCounter.4.5.0\lib\net461\System.Diagnostics.PerformanceCounter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.4.6.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Channels.4.7.0\lib\netstandard2.0\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormMeni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMeni.Designer.cs">
+      <DependentUpon>FormMeni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNarudzbenice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNarudzbenice.Designer.cs">
+      <DependentUpon>FormNarudzbenice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNovaOtpremnica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNovaOtpremnica.Designer.cs">
+      <DependentUpon>FormNovaOtpremnica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNovaStavkaNarudzbenice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNovaStavkaNarudzbenice.Designer.cs">
+      <DependentUpon>FormNovaStavkaNarudzbenice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNovaStavkaOtpremnice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNovaStavkaOtpremnice.Designer.cs">
+      <DependentUpon>FormNovaStavkaOtpremnice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNovaStavkaPrimka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNovaStavkaPrimka.Designer.cs">
+      <DependentUpon>FormNovaStavkaPrimka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOprema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOprema.Designer.cs">
+      <DependentUpon>FormOprema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOtpremnice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOtpremnice.Designer.cs">
+      <DependentUpon>FormOtpremnice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrijava.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPrijava.Designer.cs">
+      <DependentUpon>FormPrijava.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrimke.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPrimke.Designer.cs">
+      <DependentUpon>FormPrimke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPromijeniOtpremnica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPromijeniOtpremnica.Designer.cs">
+      <DependentUpon>FormPromijeniOtpremnica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStatistikaOtp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStatistikaOtp.Designer.cs">
+      <DependentUpon>FormStatistikaOtp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStatistikaZap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStatistikaZap.Designer.cs">
+      <DependentUpon>FormStatistikaZap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormZaposlenici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZaposlenici.Designer.cs">
+      <DependentUpon>FormZaposlenici.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Narudzbenica.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Oprema.code.cs" />
+    <Compile Include="Oprema.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Otpremnica.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Prijava.cs" />
+    <Compile Include="Primka.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkladisteModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkladisteModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SkladisteModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SkladisteModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkladisteModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="StavkaNarudzbenice.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StavkaOtpremnice.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StavkaPrimke.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VrstaOpreme.code.cs" />
+    <Compile Include="VrstaOpreme.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zaposlenik.code.cs" />
+    <Compile Include="Zaposlenik.cs">
+      <DependentUpon>SkladisteModel.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormMeni.resx">
+      <DependentUpon>FormMeni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNarudzbenice.resx">
+      <DependentUpon>FormNarudzbenice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNovaOtpremnica.resx">
+      <DependentUpon>FormNovaOtpremnica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNovaStavkaNarudzbenice.resx">
+      <DependentUpon>FormNovaStavkaNarudzbenice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNovaStavkaOtpremnice.resx">
+      <DependentUpon>FormNovaStavkaOtpremnice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNovaStavkaPrimka.resx">
+      <DependentUpon>FormNovaStavkaPrimka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOprema.resx">
+      <DependentUpon>FormOprema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOtpremnice.resx">
+      <DependentUpon>FormOtpremnice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPrijava.resx">
+      <DependentUpon>FormPrijava.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPrimke.resx">
+      <DependentUpon>FormPrimke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPromijeniOtpremnica.resx">
+      <DependentUpon>FormPromijeniOtpremnica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStatistikaOtp.resx">
+      <DependentUpon>FormStatistikaOtp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStatistikaZap.resx">
+      <DependentUpon>FormStatistikaZap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormZaposlenici.resx">
+      <DependentUpon>FormZaposlenici.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EntityDeploy Include="SkladisteModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SkladisteModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SkladisteModel.edmx.diagram">
+      <DependentUpon>SkladisteModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SkladisteModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SkladisteModel.edmx</DependentUpon>
+      <LastGenOutput>SkladisteModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SkladisteModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SkladisteModel.edmx</DependentUpon>
+      <LastGenOutput>SkladisteModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

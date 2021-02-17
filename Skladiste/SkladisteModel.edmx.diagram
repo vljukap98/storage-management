@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16e22a00de314077996240966bb3f942" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="skladistedbModel.Narudzbenica" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="skladistedbModel.Oprema" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="skladistedbModel.Otpremnica" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="skladistedbModel.Primka" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="skladistedbModel.StavkaNarudzbenice" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="skladistedbModel.StavkaOtpremnice" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="skladistedbModel.StavkaPrimke" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="skladistedbModel.VrstaOpreme" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="skladistedbModel.Zaposlenik" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="skladistedbModel.public_Narudzbenica_ZaposlenikId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_StavkaNarudzbenice_NarudzbenicaId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_Oprema_VrstaOpremeId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_StavkaNarudzbenice_OpremaId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_StavkaOtpremnice_OpremaId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_StavkaPrimke_OpremaId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_Otpremnica_ZaposlenikId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_StavkaOtpremnice_OtpremnicaId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_Primka_ZaposlenikId_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="skladistedbModel.public_StavkaPrimke_PrimkaId_fkey" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

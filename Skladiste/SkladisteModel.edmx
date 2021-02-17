@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="skladistedbModel.Store" Provider="Devart.Data.PostgreSql" ProviderManifestToken="PostgreSQL, 13.1.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Narudzbenica">
+          <Key>
+            <PropertyRef Name="NarudzbenicaId" />
+          </Key>
+          <Property Name="NarudzbenicaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatumKreiranja" Type="timestamp" Precision="6" />
+          <Property Name="ZaposlenikId" Type="int" />
+        </EntityType>
+        <EntityType Name="Oprema">
+          <Key>
+            <PropertyRef Name="OpremaId" />
+          </Key>
+          <Property Name="OpremaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="text" />
+          <Property Name="MinKol" Type="int" />
+          <Property Name="MaxKol" Type="int" />
+          <Property Name="Kol" Type="int" />
+          <Property Name="JedCijena" Type="real" />
+          <Property Name="VrstaOpremeId" Type="int" />
+        </EntityType>
+        <EntityType Name="Otpremnica">
+          <Key>
+            <PropertyRef Name="OtpremnicaId" />
+          </Key>
+          <Property Name="OtpremnicaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdresaDostave" Type="text" />
+          <Property Name="DatumKreiranja" Type="timestamp" Precision="6" />
+          <Property Name="ZaposlenikId" Type="int" />
+        </EntityType>
+        <EntityType Name="Primka">
+          <Key>
+            <PropertyRef Name="PrimkaId" />
+          </Key>
+          <Property Name="PrimkaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatumKreiranja" Type="timestamp" Precision="6" />
+          <Property Name="ZaposlenikId" Type="int" />
+        </EntityType>
+        <EntityType Name="StavkaNarudzbenice">
+          <Key>
+            <PropertyRef Name="NarudzbenicaId" />
+            <PropertyRef Name="OpremaId" />
+          </Key>
+          <Property Name="NarudzbenicaId" Type="int" Nullable="false" />
+          <Property Name="OpremaId" Type="int" Nullable="false" />
+          <Property Name="Kol" Type="int" />
+        </EntityType>
+        <EntityType Name="StavkaOtpremnice">
+          <Key>
+            <PropertyRef Name="OtpremnicaId" />
+            <PropertyRef Name="OpremaId" />
+          </Key>
+          <Property Name="OtpremnicaId" Type="int" Nullable="false" />
+          <Property Name="OpremaId" Type="int" Nullable="false" />
+          <Property Name="Kol" Type="int" />
+        </EntityType>
+        <EntityType Name="StavkaPrimke">
+          <Key>
+            <PropertyRef Name="PrimkaId" />
+            <PropertyRef Name="OpremaId" />
+          </Key>
+          <Property Name="PrimkaId" Type="int" Nullable="false" />
+          <Property Name="OpremaId" Type="int" Nullable="false" />
+          <Property Name="Kol" Type="int" />
+        </EntityType>
+        <EntityType Name="VrstaOpreme">
+          <Key>
+            <PropertyRef Name="VrstaOpremeId" />
+          </Key>
+          <Property Name="VrstaOpremeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="text" />
+        </EntityType>
+        <EntityType Name="Zaposlenik">
+          <Key>
+            <PropertyRef Name="ZaposlenikId" />
+          </Key>
+          <Property Name="ZaposlenikId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="text" />
+          <Property Name="Prezime" Type="text" />
+          <Property Name="KorIme" Type="text" />
+          <Property Name="Lozinka" Type="text" />
+          <Property Name="DatumZavrsetka" Type="timestamp" Precision="6" />
+        </EntityType>
+        <Association Name="public_Narudzbenica_ZaposlenikId_fkey">
+          <End Role="Zaposlenik" Type="Self.Zaposlenik" Multiplicity="0..1" />
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zaposlenik">
+              <PropertyRef Name="ZaposlenikId" />
+            </Principal>
+            <Dependent Role="Narudzbenica">
+              <PropertyRef Name="ZaposlenikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_Oprema_VrstaOpremeId_fkey">
+          <End Role="VrstaOpreme" Type="Self.VrstaOpreme" Multiplicity="0..1" />
+          <End Role="Oprema" Type="Self.Oprema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VrstaOpreme">
+              <PropertyRef Name="VrstaOpremeId" />
+            </Principal>
+            <Dependent Role="Oprema">
+              <PropertyRef Name="VrstaOpremeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_Otpremnica_ZaposlenikId_fkey">
+          <End Role="Zaposlenik" Type="Self.Zaposlenik" Multiplicity="0..1" />
+          <End Role="Otpremnica" Type="Self.Otpremnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zaposlenik">
+              <PropertyRef Name="ZaposlenikId" />
+            </Principal>
+            <Dependent Role="Otpremnica">
+              <PropertyRef Name="ZaposlenikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_Primka_ZaposlenikId_fkey">
+          <End Role="Zaposlenik" Type="Self.Zaposlenik" Multiplicity="0..1" />
+          <End Role="Primka" Type="Self.Primka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zaposlenik">
+              <PropertyRef Name="ZaposlenikId" />
+            </Principal>
+            <Dependent Role="Primka">
+              <PropertyRef Name="ZaposlenikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaNarudzbenice_NarudzbenicaId_fkey">
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="1" />
+          <End Role="StavkaNarudzbenice" Type="Self.StavkaNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Narudzbenica">
+              <PropertyRef Name="NarudzbenicaId" />
+            </Principal>
+            <Dependent Role="StavkaNarudzbenice">
+              <PropertyRef Name="NarudzbenicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaNarudzbenice_OpremaId_fkey">
+          <End Role="Oprema" Type="Self.Oprema" Multiplicity="1" />
+          <End Role="StavkaNarudzbenice" Type="Self.StavkaNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oprema">
+              <PropertyRef Name="OpremaId" />
+            </Principal>
+            <Dependent Role="StavkaNarudzbenice">
+              <PropertyRef Name="OpremaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaOtpremnice_OpremaId_fkey">
+          <End Role="Oprema" Type="Self.Oprema" Multiplicity="1" />
+          <End Role="StavkaOtpremnice" Type="Self.StavkaOtpremnice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oprema">
+              <PropertyRef Name="OpremaId" />
+            </Principal>
+            <Dependent Role="StavkaOtpremnice">
+              <PropertyRef Name="OpremaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaOtpremnice_OtpremnicaId_fkey">
+          <End Role="Otpremnica" Type="Self.Otpremnica" Multiplicity="1" />
+          <End Role="StavkaOtpremnice" Type="Self.StavkaOtpremnice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otpremnica">
+              <PropertyRef Name="OtpremnicaId" />
+            </Principal>
+            <Dependent Role="StavkaOtpremnice">
+              <PropertyRef Name="OtpremnicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaPrimke_OpremaId_fkey">
+          <End Role="Oprema" Type="Self.Oprema" Multiplicity="1" />
+          <End Role="StavkaPrimke" Type="Self.StavkaPrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oprema">
+              <PropertyRef Name="OpremaId" />
+            </Principal>
+            <Dependent Role="StavkaPrimke">
+              <PropertyRef Name="OpremaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaPrimke_PrimkaId_fkey">
+          <End Role="Primka" Type="Self.Primka" Multiplicity="1" />
+          <End Role="StavkaPrimke" Type="Self.StavkaPrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Primka">
+              <PropertyRef Name="PrimkaId" />
+            </Principal>
+            <Dependent Role="StavkaPrimke">
+              <PropertyRef Name="PrimkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="skladistedbModelStoreContainer">
+          <EntitySet Name="Narudzbenica" EntityType="Self.Narudzbenica" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Oprema" EntityType="Self.Oprema" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Otpremnica" EntityType="Self.Otpremnica" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Primka" EntityType="Self.Primka" Schema="public" store:Type="Tables" />
+          <EntitySet Name="StavkaNarudzbenice" EntityType="Self.StavkaNarudzbenice" Schema="public" store:Type="Tables" />
+          <EntitySet Name="StavkaOtpremnice" EntityType="Self.StavkaOtpremnice" Schema="public" store:Type="Tables" />
+          <EntitySet Name="StavkaPrimke" EntityType="Self.StavkaPrimke" Schema="public" store:Type="Tables" />
+          <EntitySet Name="VrstaOpreme" EntityType="Self.VrstaOpreme" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Zaposlenik" EntityType="Self.Zaposlenik" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="public_Narudzbenica_ZaposlenikId_fkey" Association="Self.public_Narudzbenica_ZaposlenikId_fkey">
+            <End Role="Zaposlenik" EntitySet="Zaposlenik" />
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+          </AssociationSet>
+          <AssociationSet Name="public_Oprema_VrstaOpremeId_fkey" Association="Self.public_Oprema_VrstaOpremeId_fkey">
+            <End Role="VrstaOpreme" EntitySet="VrstaOpreme" />
+            <End Role="Oprema" EntitySet="Oprema" />
+          </AssociationSet>
+          <AssociationSet Name="public_Otpremnica_ZaposlenikId_fkey" Association="Self.public_Otpremnica_ZaposlenikId_fkey">
+            <End Role="Zaposlenik" EntitySet="Zaposlenik" />
+            <End Role="Otpremnica" EntitySet="Otpremnica" />
+          </AssociationSet>
+          <AssociationSet Name="public_Primka_ZaposlenikId_fkey" Association="Self.public_Primka_ZaposlenikId_fkey">
+            <End Role="Zaposlenik" EntitySet="Zaposlenik" />
+            <End Role="Primka" EntitySet="Primka" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaNarudzbenice_NarudzbenicaId_fkey" Association="Self.public_StavkaNarudzbenice_NarudzbenicaId_fkey">
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+            <End Role="StavkaNarudzbenice" EntitySet="StavkaNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaNarudzbenice_OpremaId_fkey" Association="Self.public_StavkaNarudzbenice_OpremaId_fkey">
+            <End Role="Oprema" EntitySet="Oprema" />
+            <End Role="StavkaNarudzbenice" EntitySet="StavkaNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaOtpremnice_OpremaId_fkey" Association="Self.public_StavkaOtpremnice_OpremaId_fkey">
+            <End Role="Oprema" EntitySet="Oprema" />
+            <End Role="StavkaOtpremnice" EntitySet="StavkaOtpremnice" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaOtpremnice_OtpremnicaId_fkey" Association="Self.public_StavkaOtpremnice_OtpremnicaId_fkey">
+            <End Role="Otpremnica" EntitySet="Otpremnica" />
+            <End Role="StavkaOtpremnice" EntitySet="StavkaOtpremnice" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaPrimke_OpremaId_fkey" Association="Self.public_StavkaPrimke_OpremaId_fkey">
+            <End Role="Oprema" EntitySet="Oprema" />
+            <End Role="StavkaPrimke" EntitySet="StavkaPrimke" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaPrimke_PrimkaId_fkey" Association="Self.public_StavkaPrimke_PrimkaId_fkey">
+            <End Role="Primka" EntitySet="Primka" />
+            <End Role="StavkaPrimke" EntitySet="StavkaPrimke" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="skladistedbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Narudzbenica">
+          <Key>
+            <PropertyRef Name="NarudzbenicaId" />
+          </Key>
+          <Property Name="NarudzbenicaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatumKreiranja" Type="DateTime" Precision="6" />
+          <Property Name="ZaposlenikId" Type="Int32" />
+          <NavigationProperty Name="Zaposlenik" Relationship="Self.public_Narudzbenica_ZaposlenikId_fkey" FromRole="Narudzbenica" ToRole="Zaposlenik" />
+          <NavigationProperty Name="StavkaNarudzbenice" Relationship="Self.public_StavkaNarudzbenice_NarudzbenicaId_fkey" FromRole="Narudzbenica" ToRole="StavkaNarudzbenice" />
+        </EntityType>
+        <EntityType Name="Oprema">
+          <Key>
+            <PropertyRef Name="OpremaId" />
+          </Key>
+          <Property Name="OpremaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MinKol" Type="Int32" />
+          <Property Name="MaxKol" Type="Int32" />
+          <Property Name="Kol" Type="Int32" />
+          <Property Name="JedCijena" Type="Single" />
+          <Property Name="VrstaOpremeId" Type="Int32" />
+          <NavigationProperty Name="VrstaOpreme" Relationship="Self.public_Oprema_VrstaOpremeId_fkey" FromRole="Oprema" ToRole="VrstaOpreme" />
+          <NavigationProperty Name="StavkaNarudzbenice" Relationship="Self.public_StavkaNarudzbenice_OpremaId_fkey" FromRole="Oprema" ToRole="StavkaNarudzbenice" />
+          <NavigationProperty Name="StavkaOtpremnice" Relationship="Self.public_StavkaOtpremnice_OpremaId_fkey" FromRole="Oprema" ToRole="StavkaOtpremnice" />
+          <NavigationProperty Name="StavkaPrimke" Relationship="Self.public_StavkaPrimke_OpremaId_fkey" FromRole="Oprema" ToRole="StavkaPrimke" />
+        </EntityType>
+        <EntityType Name="Otpremnica">
+          <Key>
+            <PropertyRef Name="OtpremnicaId" />
+          </Key>
+          <Property Name="OtpremnicaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdresaDostave" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatumKreiranja" Type="DateTime" Precision="6" />
+          <Property Name="ZaposlenikId" Type="Int32" />
+          <NavigationProperty Name="Zaposlenik" Relationship="Self.public_Otpremnica_ZaposlenikId_fkey" FromRole="Otpremnica" ToRole="Zaposlenik" />
+          <NavigationProperty Name="StavkaOtpremnice" Relationship="Self.public_StavkaOtpremnice_OtpremnicaId_fkey" FromRole="Otpremnica" ToRole="StavkaOtpremnice" />
+        </EntityType>
+        <EntityType Name="Primka">
+          <Key>
+            <PropertyRef Name="PrimkaId" />
+          </Key>
+          <Property Name="PrimkaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatumKreiranja" Type="DateTime" Precision="6" />
+          <Property Name="ZaposlenikId" Type="Int32" />
+          <NavigationProperty Name="Zaposlenik" Relationship="Self.public_Primka_ZaposlenikId_fkey" FromRole="Primka" ToRole="Zaposlenik" />
+          <NavigationProperty Name="StavkaPrimke" Relationship="Self.public_StavkaPrimke_PrimkaId_fkey" FromRole="Primka" ToRole="StavkaPrimke" />
+        </EntityType>
+        <EntityType Name="StavkaNarudzbenice">
+          <Key>
+            <PropertyRef Name="NarudzbenicaId" />
+            <PropertyRef Name="OpremaId" />
+          </Key>
+          <Property Name="NarudzbenicaId" Type="Int32" Nullable="false" />
+          <Property Name="OpremaId" Type="Int32" Nullable="false" />
+          <Property Name="Kol" Type="Int32" />
+          <NavigationProperty Name="Narudzbenica" Relationship="Self.public_StavkaNarudzbenice_NarudzbenicaId_fkey" FromRole="StavkaNarudzbenice" ToRole="Narudzbenica" />
+          <NavigationProperty Name="Oprema" Relationship="Self.public_StavkaNarudzbenice_OpremaId_fkey" FromRole="StavkaNarudzbenice" ToRole="Oprema" />
+        </EntityType>
+        <EntityType Name="StavkaOtpremnice">
+          <Key>
+            <PropertyRef Name="OtpremnicaId" />
+            <PropertyRef Name="OpremaId" />
+          </Key>
+          <Property Name="OtpremnicaId" Type="Int32" Nullable="false" />
+          <Property Name="OpremaId" Type="Int32" Nullable="false" />
+          <Property Name="Kol" Type="Int32" />
+          <NavigationProperty Name="Oprema" Relationship="Self.public_StavkaOtpremnice_OpremaId_fkey" FromRole="StavkaOtpremnice" ToRole="Oprema" />
+          <NavigationProperty Name="Otpremnica" Relationship="Self.public_StavkaOtpremnice_OtpremnicaId_fkey" FromRole="StavkaOtpremnice" ToRole="Otpremnica" />
+        </EntityType>
+        <EntityType Name="StavkaPrimke">
+          <Key>
+            <PropertyRef Name="PrimkaId" />
+            <PropertyRef Name="OpremaId" />
+          </Key>
+          <Property Name="PrimkaId" Type="Int32" Nullable="false" />
+          <Property Name="OpremaId" Type="Int32" Nullable="false" />
+          <Property Name="Kol" Type="Int32" />
+          <NavigationProperty Name="Oprema" Relationship="Self.public_StavkaPrimke_OpremaId_fkey" FromRole="StavkaPrimke" ToRole="Oprema" />
+          <NavigationProperty Name="Primka" Relationship="Self.public_StavkaPrimke_PrimkaId_fkey" FromRole="StavkaPrimke" ToRole="Primka" />
+        </EntityType>
+        <EntityType Name="VrstaOpreme">
+          <Key>
+            <PropertyRef Name="VrstaOpremeId" />
+          </Key>
+          <Property Name="VrstaOpremeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Oprema" Relationship="Self.public_Oprema_VrstaOpremeId_fkey" FromRole="VrstaOpreme" ToRole="Oprema" />
+        </EntityType>
+        <EntityType Name="Zaposlenik">
+          <Key>
+            <PropertyRef Name="ZaposlenikId" />
+          </Key>
+          <Property Name="ZaposlenikId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prezime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KorIme" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lozinka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatumZavrsetka" Type="DateTime" Precision="6" />
+          <NavigationProperty Name="Narudzbenica" Relationship="Self.public_Narudzbenica_ZaposlenikId_fkey" FromRole="Zaposlenik" ToRole="Narudzbenica" />
+          <NavigationProperty Name="Otpremnica" Relationship="Self.public_Otpremnica_ZaposlenikId_fkey" FromRole="Zaposlenik" ToRole="Otpremnica" />
+          <NavigationProperty Name="Primka" Relationship="Self.public_Primka_ZaposlenikId_fkey" FromRole="Zaposlenik" ToRole="Primka" />
+        </EntityType>
+        <Association Name="public_Narudzbenica_ZaposlenikId_fkey">
+          <End Role="Zaposlenik" Type="Self.Zaposlenik" Multiplicity="0..1" />
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zaposlenik">
+              <PropertyRef Name="ZaposlenikId" />
+            </Principal>
+            <Dependent Role="Narudzbenica">
+              <PropertyRef Name="ZaposlenikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaNarudzbenice_NarudzbenicaId_fkey">
+          <End Role="Narudzbenica" Type="Self.Narudzbenica" Multiplicity="1" />
+          <End Role="StavkaNarudzbenice" Type="Self.StavkaNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Narudzbenica">
+              <PropertyRef Name="NarudzbenicaId" />
+            </Principal>
+            <Dependent Role="StavkaNarudzbenice">
+              <PropertyRef Name="NarudzbenicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_Oprema_VrstaOpremeId_fkey">
+          <End Role="VrstaOpreme" Type="Self.VrstaOpreme" Multiplicity="0..1" />
+          <End Role="Oprema" Type="Self.Oprema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VrstaOpreme">
+              <PropertyRef Name="VrstaOpremeId" />
+            </Principal>
+            <Dependent Role="Oprema">
+              <PropertyRef Name="VrstaOpremeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaNarudzbenice_OpremaId_fkey">
+          <End Role="Oprema" Type="Self.Oprema" Multiplicity="1" />
+          <End Role="StavkaNarudzbenice" Type="Self.StavkaNarudzbenice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oprema">
+              <PropertyRef Name="OpremaId" />
+            </Principal>
+            <Dependent Role="StavkaNarudzbenice">
+              <PropertyRef Name="OpremaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaOtpremnice_OpremaId_fkey">
+          <End Role="Oprema" Type="Self.Oprema" Multiplicity="1" />
+          <End Role="StavkaOtpremnice" Type="Self.StavkaOtpremnice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oprema">
+              <PropertyRef Name="OpremaId" />
+            </Principal>
+            <Dependent Role="StavkaOtpremnice">
+              <PropertyRef Name="OpremaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaPrimke_OpremaId_fkey">
+          <End Role="Oprema" Type="Self.Oprema" Multiplicity="1" />
+          <End Role="StavkaPrimke" Type="Self.StavkaPrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oprema">
+              <PropertyRef Name="OpremaId" />
+            </Principal>
+            <Dependent Role="StavkaPrimke">
+              <PropertyRef Name="OpremaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_Otpremnica_ZaposlenikId_fkey">
+          <End Role="Zaposlenik" Type="Self.Zaposlenik" Multiplicity="0..1" />
+          <End Role="Otpremnica" Type="Self.Otpremnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zaposlenik">
+              <PropertyRef Name="ZaposlenikId" />
+            </Principal>
+            <Dependent Role="Otpremnica">
+              <PropertyRef Name="ZaposlenikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaOtpremnice_OtpremnicaId_fkey">
+          <End Role="Otpremnica" Type="Self.Otpremnica" Multiplicity="1" />
+          <End Role="StavkaOtpremnice" Type="Self.StavkaOtpremnice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otpremnica">
+              <PropertyRef Name="OtpremnicaId" />
+            </Principal>
+            <Dependent Role="StavkaOtpremnice">
+              <PropertyRef Name="OtpremnicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_Primka_ZaposlenikId_fkey">
+          <End Role="Zaposlenik" Type="Self.Zaposlenik" Multiplicity="0..1" />
+          <End Role="Primka" Type="Self.Primka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zaposlenik">
+              <PropertyRef Name="ZaposlenikId" />
+            </Principal>
+            <Dependent Role="Primka">
+              <PropertyRef Name="ZaposlenikId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_StavkaPrimke_PrimkaId_fkey">
+          <End Role="Primka" Type="Self.Primka" Multiplicity="1" />
+          <End Role="StavkaPrimke" Type="Self.StavkaPrimke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Primka">
+              <PropertyRef Name="PrimkaId" />
+            </Principal>
+            <Dependent Role="StavkaPrimke">
+              <PropertyRef Name="PrimkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="skladistedbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Narudzbenica" EntityType="Self.Narudzbenica" />
+          <EntitySet Name="Oprema" EntityType="Self.Oprema" />
+          <EntitySet Name="Otpremnica" EntityType="Self.Otpremnica" />
+          <EntitySet Name="Primka" EntityType="Self.Primka" />
+          <EntitySet Name="StavkaNarudzbenice" EntityType="Self.StavkaNarudzbenice" />
+          <EntitySet Name="StavkaOtpremnice" EntityType="Self.StavkaOtpremnice" />
+          <EntitySet Name="StavkaPrimke" EntityType="Self.StavkaPrimke" />
+          <EntitySet Name="VrstaOpreme" EntityType="Self.VrstaOpreme" />
+          <EntitySet Name="Zaposlenik" EntityType="Self.Zaposlenik" />
+          <AssociationSet Name="public_Narudzbenica_ZaposlenikId_fkey" Association="Self.public_Narudzbenica_ZaposlenikId_fkey">
+            <End Role="Zaposlenik" EntitySet="Zaposlenik" />
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaNarudzbenice_NarudzbenicaId_fkey" Association="Self.public_StavkaNarudzbenice_NarudzbenicaId_fkey">
+            <End Role="Narudzbenica" EntitySet="Narudzbenica" />
+            <End Role="StavkaNarudzbenice" EntitySet="StavkaNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="public_Oprema_VrstaOpremeId_fkey" Association="Self.public_Oprema_VrstaOpremeId_fkey">
+            <End Role="VrstaOpreme" EntitySet="VrstaOpreme" />
+            <End Role="Oprema" EntitySet="Oprema" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaNarudzbenice_OpremaId_fkey" Association="Self.public_StavkaNarudzbenice_OpremaId_fkey">
+            <End Role="Oprema" EntitySet="Oprema" />
+            <End Role="StavkaNarudzbenice" EntitySet="StavkaNarudzbenice" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaOtpremnice_OpremaId_fkey" Association="Self.public_StavkaOtpremnice_OpremaId_fkey">
+            <End Role="Oprema" EntitySet="Oprema" />
+            <End Role="StavkaOtpremnice" EntitySet="StavkaOtpremnice" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaPrimke_OpremaId_fkey" Association="Self.public_StavkaPrimke_OpremaId_fkey">
+            <End Role="Oprema" EntitySet="Oprema" />
+            <End Role="StavkaPrimke" EntitySet="StavkaPrimke" />
+          </AssociationSet>
+          <AssociationSet Name="public_Otpremnica_ZaposlenikId_fkey" Association="Self.public_Otpremnica_ZaposlenikId_fkey">
+            <End Role="Zaposlenik" EntitySet="Zaposlenik" />
+            <End Role="Otpremnica" EntitySet="Otpremnica" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaOtpremnice_OtpremnicaId_fkey" Association="Self.public_StavkaOtpremnice_OtpremnicaId_fkey">
+            <End Role="Otpremnica" EntitySet="Otpremnica" />
+            <End Role="StavkaOtpremnice" EntitySet="StavkaOtpremnice" />
+          </AssociationSet>
+          <AssociationSet Name="public_Primka_ZaposlenikId_fkey" Association="Self.public_Primka_ZaposlenikId_fkey">
+            <End Role="Zaposlenik" EntitySet="Zaposlenik" />
+            <End Role="Primka" EntitySet="Primka" />
+          </AssociationSet>
+          <AssociationSet Name="public_StavkaPrimke_PrimkaId_fkey" Association="Self.public_StavkaPrimke_PrimkaId_fkey">
+            <End Role="Primka" EntitySet="Primka" />
+            <End Role="StavkaPrimke" EntitySet="StavkaPrimke" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="skladistedbModelStoreContainer" CdmEntityContainer="skladistedbEntities">
+          <EntitySetMapping Name="Narudzbenica">
+            <EntityTypeMapping TypeName="skladistedbModel.Narudzbenica">
+              <MappingFragment StoreEntitySet="Narudzbenica">
+                <ScalarProperty Name="NarudzbenicaId" ColumnName="NarudzbenicaId" />
+                <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+                <ScalarProperty Name="ZaposlenikId" ColumnName="ZaposlenikId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oprema">
+            <EntityTypeMapping TypeName="skladistedbModel.Oprema">
+              <MappingFragment StoreEntitySet="Oprema">
+                <ScalarProperty Name="OpremaId" ColumnName="OpremaId" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="MinKol" ColumnName="MinKol" />
+                <ScalarProperty Name="MaxKol" ColumnName="MaxKol" />
+                <ScalarProperty Name="Kol" ColumnName="Kol" />
+                <ScalarProperty Name="JedCijena" ColumnName="JedCijena" />
+                <ScalarProperty Name="VrstaOpremeId" ColumnName="VrstaOpremeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Otpremnica">
+            <EntityTypeMapping TypeName="skladistedbModel.Otpremnica">
+              <MappingFragment StoreEntitySet="Otpremnica">
+                <ScalarProperty Name="OtpremnicaId" ColumnName="OtpremnicaId" />
+                <ScalarProperty Name="AdresaDostave" ColumnName="AdresaDostave" />
+                <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+                <ScalarProperty Name="ZaposlenikId" ColumnName="ZaposlenikId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Primka">
+            <EntityTypeMapping TypeName="skladistedbModel.Primka">
+              <MappingFragment StoreEntitySet="Primka">
+                <ScalarProperty Name="PrimkaId" ColumnName="PrimkaId" />
+                <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+                <ScalarProperty Name="ZaposlenikId" ColumnName="ZaposlenikId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaNarudzbenice">
+            <EntityTypeMapping TypeName="skladistedbModel.StavkaNarudzbenice">
+              <MappingFragment StoreEntitySet="StavkaNarudzbenice">
+                <ScalarProperty Name="NarudzbenicaId" ColumnName="NarudzbenicaId" />
+                <ScalarProperty Name="OpremaId" ColumnName="OpremaId" />
+                <ScalarProperty Name="Kol" ColumnName="Kol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaOtpremnice">
+            <EntityTypeMapping TypeName="skladistedbModel.StavkaOtpremnice">
+              <MappingFragment StoreEntitySet="StavkaOtpremnice">
+                <ScalarProperty Name="OtpremnicaId" ColumnName="OtpremnicaId" />
+                <ScalarProperty Name="OpremaId" ColumnName="OpremaId" />
+                <ScalarProperty Name="Kol" ColumnName="Kol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaPrimke">
+            <EntityTypeMapping TypeName="skladistedbModel.StavkaPrimke">
+              <MappingFragment StoreEntitySet="StavkaPrimke">
+                <ScalarProperty Name="PrimkaId" ColumnName="PrimkaId" />
+                <ScalarProperty Name="OpremaId" ColumnName="OpremaId" />
+                <ScalarProperty Name="Kol" ColumnName="Kol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VrstaOpreme">
+            <EntityTypeMapping TypeName="skladistedbModel.VrstaOpreme">
+              <MappingFragment StoreEntitySet="VrstaOpreme">
+                <ScalarProperty Name="VrstaOpremeId" ColumnName="VrstaOpremeId" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zaposlenik">
+            <EntityTypeMapping TypeName="skladistedbModel.Zaposlenik">
+              <MappingFragment StoreEntitySet="Zaposlenik">
+                <ScalarProperty Name="ZaposlenikId" ColumnName="ZaposlenikId" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="KorIme" ColumnName="KorIme" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="DatumZavrsetka" ColumnName="DatumZavrsetka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
